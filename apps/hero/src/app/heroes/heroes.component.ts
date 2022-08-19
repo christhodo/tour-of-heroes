@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../common/models/hero';
+import { HeroesService } from '../common/services/heroes.service';
 
 const emptyHero: Hero = {
   id: null,
@@ -13,27 +14,15 @@ const emptyHero: Hero = {
   styleUrls: ['./heroes.component.scss'],
 })
 export class HeroesComponent implements OnInit {
-  heroes = [
-    {
-      id: '1',
-      alias: 'Superman',
-      description:
-        'Clark Kent thinks he is slick without wearing a mask to hide his identity. We are on to him.',
-    },
-    {
-      id: '2',
-      alias: 'Batman',
-      description:
-        'This guy thinks he is a superhero without any special powers.',
-    },
-  ];
-
+  heroes = [];
   selectedHero = emptyHero;
   originalAlias = '';
 
-  constructor() {}
+  constructor(private heroesService: HeroesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.heroes = this.heroesService.heroes;
+  }
 
   selectHero(hero) {
     this.selectedHero = { ...hero };
