@@ -1,1 +1,51 @@
-<p>hero-details works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <span *ngIf="currentHero?.id; else elseBlock">
+        {{ originalAlias | titlecase }}
+      </span>
+      <ng-template #elseBlock>Select a Hero</ng-template>
+    </mat-card-title>
+  </mat-card-header>
+  <form #form="ngForm" (submit)="saved.emit(currentHero)">
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Alias"
+          [(ngModel)]="currentHero.alias"
+          name="title"
+          required
+          type="text"
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <textarea
+          matInput
+          placeholder="Description"
+          [(ngModel)]="currentHero.description"
+          name="description"
+          type="text"
+        ></textarea>
+      </mat-form-field>
+      <section class="full-width"></section>
+      <section></section>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        mat-button
+        color="primary"
+      >
+        Save
+      </button>
+      <button type="button" mat-button (click)="cancelled.emit()">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+  <hr />
+  <pre>{{ form.value | json }}</pre>
+  <pre>{{ form.valid | json }}</pre>
+</mat-card>

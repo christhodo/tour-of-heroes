@@ -1,1 +1,29 @@
-<p>heroes-list works!</p>
+<div class="heroes-containers">
+  <div class="heroes-list">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> Hero List </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item
+            *ngFor="let hero of heroes"
+            (click)="selected.emit(hero)"
+          >
+            <h3 matLine>{{ hero.alias | titlecase }}</h3>
+            <p matLine>
+              {{ hero.description }}
+            </p>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleted.emit(hero.id); $event.stopImmediatePropagation()"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
