@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Hero } from '../common/models/hero';
 import { HeroesService } from '../common/services/heroes.service';
 
@@ -15,26 +16,42 @@ const emptyHero: Hero = {
 })
 export class HeroesComponent implements OnInit {
   heroes = [];
+  heroes$: any;
   selectedHero = emptyHero;
   originalAlias = '';
 
   constructor(private heroesService: HeroesService) {}
 
   ngOnInit(): void {
-    this.heroes = this.heroesService.heroes;
+    this.fetchHeros();
   }
 
   selectHero(hero) {
-    this.selectedHero = { ...hero };
-    this.originalAlias = hero.alias;
+    this.selectedHero = hero;
+  }
+
+  fetchHeros() {
+    this.heroes$ = this.heroesService.all();
   }
 
   saveHero(hero) {
-    console.log('SAVE HERO', hero);
+    if (hero.id) {
+      this.updateHero(hero);
+    } else {
+      this.createHero(hero);
+    }
+  }
+
+  createHero(hero) {
+    this.heroesService.create(hero).subscribe((result) => this.fetchHeros());
+  }
+
+  updateHero(hero) {
+    this.heroesService.update(hero).subscribe((result) => this.fetchHeros());
   }
 
   deleteHero(heroId) {
-    console.log('DELETE HERO', heroId);
+    console.log('DELETE COURSE', heroId);
   }
 
   reset() {
