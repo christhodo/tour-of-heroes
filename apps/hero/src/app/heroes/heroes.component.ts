@@ -51,7 +51,7 @@ export class HeroesComponent implements OnInit {
   }
 
   deleteHero(heroId) {
-    console.log('DELETE COURSE', heroId);
+    console.log('DELETE HERO', heroId);
   }
 
   reset() {
