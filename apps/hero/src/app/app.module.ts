@@ -11,6 +11,8 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app.routing.module';
+import { EnvironmentModule } from '@tour-of-heroes-app/environment';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { AppRoutingModule } from './app.routing.module';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    EnvironmentModule.withEnvironment(environment),
   ],
   providers: [],
   bootstrap: [AppComponent],

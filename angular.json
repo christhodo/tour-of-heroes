@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "environment": "libs/environment",
     "hero": "apps/hero",
     "hero-e2e": "apps/hero-e2e"
   }
